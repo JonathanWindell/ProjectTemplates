@@ -7,8 +7,6 @@ A sidebar menu for navigating between different pages in the application.
 
 Usage:
 jsx
-Kopiera
-Redigera
 import { Sidebar } from './components';
 
 const items = [
@@ -23,8 +21,6 @@ A component for creating tabs or collapsible sections.
 
 Usage:
 jsx
-Kopiera
-Redigera
 import { Tabs } from './components';
 
 const tabs = [
@@ -39,8 +35,6 @@ A popup component that can be used to display messages or forms.
 
 Usage:
 jsx
-Kopiera
-Redigera
 import { Modal } from './components';
 
 const [isOpen, setIsOpen] = useState(false);
@@ -56,8 +50,6 @@ A notification component that displays temporary messages, such as a success or 
 
 Usage:
 jsx
-Kopiera
-Redigera
 import { Toast } from './components';
 
 const [showToast, setShowToast] = useState(true);
@@ -72,8 +64,6 @@ A simple spinner that can be used to indicate that something is loading.
 
 Usage:
 jsx
-Kopiera
-Redigera
 import { LoadingSpinner } from './components';
 
 <LoadingSpinner />
@@ -82,8 +72,6 @@ A component for handling pagination in a list or table.
 
 Usage:
 jsx
-Kopiera
-Redigera
 import { Pagination } from './components';
 
 const [currentPage, setCurrentPage] = useState(1);
@@ -99,8 +87,6 @@ A placeholder component used to show a loading indicator before real data has be
 
 Usage:
 jsx
-Kopiera
-Redigera
 import { SkeletonLoader } from './components';
 
 <SkeletonLoader />
@@ -109,8 +95,6 @@ A higher-order component (HOC) used to protect pages that require authentication
 
 Usage:
 jsx
-Kopiera
-Redigera
 import { withAuthentication } from './components';
 
 const ProtectedPage = () => {
@@ -123,8 +107,6 @@ A higher-order component (HOC) used to manage dark or light themes in the applic
 
 Usage:
 jsx
-Kopiera
-Redigera
 import { withTheme } from './components';
 
 const ThemedPage = () => {
@@ -138,8 +120,6 @@ To use these components in your project, simply import them directly into the co
 Install React if you haven't already:
 
 bash
-Kopiera
-Redigera
 npx create-react-app my-app
 cd my-app
 Create a components folder in your project structure and copy these components into it.
@@ -147,8 +127,6 @@ Create a components folder in your project structure and copy these components i
 Import and use the components:
 
 jsx
-Kopiera
-Redigera
 import { Sidebar, Modal, Toast } from './components';
 Contributing
 If you'd like to contribute to the project or have any suggestions for improvements, feel free to open a pull request or create an issue.
