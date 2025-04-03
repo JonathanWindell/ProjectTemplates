@@ -40,8 +40,6 @@ yarn add path/to/js-helper-utilities
 Or include it directly in HTML:
 
 html
-Kopiera
-Redigera
 <script src="path/to/js-helper-utilities.js"></script>
 Overview
 This library contains the following modules:
@@ -65,8 +63,6 @@ DOMUtils
 DOM manipulation functions for the browser's frontend.
 
 javascript
-Kopiera
-Redigera
 // Select an element
 const header = DOMUtils.select('#header');
 const buttons = DOMUtils.selectAll('.button');
@@ -95,8 +91,6 @@ FormUtils
 Handle form data and validation.
 
 javascript
-Kopiera
-Redigera
 // Get form data as an object
 const form = document.querySelector('#registrationForm');
 const formData = FormUtils.getValues(form);
@@ -137,8 +131,6 @@ StorageUtils
 Simplify interaction with the browser's localStorage.
 
 javascript
-Kopiera
-Redigera
 // Save data
 StorageUtils.save('user', { id: 123, name: 'Test Testsson' });
 
@@ -158,8 +150,6 @@ APIClient
 A consistent HTTP client for both the browser and Node.js.
 
 javascript
-Kopiera
-Redigera
 // Set base URL
 APIClient.setBaseUrl('https://api.example.com/v1');
 
@@ -186,8 +176,6 @@ DataUtils
 General utilities for data manipulation.
 
 javascript
-Kopiera
-Redigera
 // Deep clone an object
 const original = { user: { name: 'Test', details: { age: 30 } } };
 const clone = DataUtils.deepClone(original);
@@ -218,8 +206,6 @@ Logger
 Structured logging with different levels.
 
 javascript
-Kopiera
-Redigera
 // Set log level (DEBUG, INFO, WARN, ERROR)
 Logger.setLevel('DEBUG');
 // or
@@ -234,8 +220,6 @@ NodeUtils
 Node.js-specific helper functions.
 
 javascript
-Kopiera
-Redigera
 // Load environment variables from .env (requires dotenv package)
 NodeUtils.loadEnv();
 

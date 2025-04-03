@@ -16,8 +16,6 @@ werkzeug: For secure password handling.
 Install all dependencies with the following command:
 
 bash
-Kopiera
-Redigera
 pip install flask flask-cors psycopg2 werkzeug
 API Endpoints
 1. GET Request to Retrieve Data
@@ -29,15 +27,11 @@ Description: This endpoint retrieves data from the database based on the provide
 
 Request:
 kotlin
-Kopiera
-Redigera
 GET /get-data?param=value
 Expected Response:
 If param is provided and the data is retrieved successfully, the response will look like:
 
 json
-Kopiera
-Redigera
 [
     {
         "column1": "data1",
@@ -48,8 +42,6 @@ Redigera
 If param is missing from the request, you will receive an error:
 
 json
-Kopiera
-Redigera
 {
     "error": "Missing 'param' parameter"
 }
@@ -64,24 +56,18 @@ Request:
 Send a POST request with JSON data in the body:
 
 json
-Kopiera
-Redigera
 {
     "column1": "new_data1",
     "column2": "new_data2"
 }
 Expected Response:
 json
-Kopiera
-Redigera
 {
     "message": "Data added successfully"
 }
 If there's an issue with the request or the database, you may receive an error message:
 
 json
-Kopiera
-Redigera
 {
     "error": "Database connection failed"
 }
@@ -96,25 +82,20 @@ Request:
 Send a PUT request with JSON data containing the values to update:
 
 json
-Kopiera
-Redigera
 {
     "param": "value_to_find",
     "column1": "updated_data1",
     "column2": "updated_data2"
 }
 Expected Response:
+
 json
-Kopiera
-Redigera
 {
     "message": "Data updated successfully"
 }
 If the specified data could not be found or updated:
 
 json
-Kopiera
-Redigera
 {
     "error": "Data update failed"
 }
@@ -129,23 +110,17 @@ Request:
 Send a DELETE request with JSON data specifying the record to delete:
 
 json
-Kopiera
-Redigera
 {
     "param": "value_to_find"
 }
 Expected Response:
 json
-Kopiera
-Redigera
 {
     "message": "Data deleted successfully"
 }
 If the deletion fails for any reason:
 
 json
-Kopiera
-Redigera
 {
     "error": "Data deletion failed"
 }
@@ -160,23 +135,17 @@ Description: These endpoints allow users to sign up and log in, with password ha
 
 Sign-Up Request:
 json
-Kopiera
-Redigera
 {
     "username": "new_user",
     "password": "new_password"
 }
 Expected Response (Sign-Up):
 json
-Kopiera
-Redigera
 {
     "message": "User signed up successfully"
 }
 Login Request:
 json
-Kopiera
-Redigera
 {
     "username": "new_user",
     "password": "new_password"
@@ -185,16 +154,12 @@ Expected Response (Login):
 If the credentials are correct:
 
 json
-Kopiera
-Redigera
 {
     "message": "Login successful"
 }
 If the credentials are invalid:
 
 json
-Kopiera
-Redigera
 {
     "message": "Invalid credentials"
 }

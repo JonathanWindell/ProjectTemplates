@@ -13,8 +13,6 @@ Installation Command:
 To install all the necessary dependencies, you can use the following command in your terminal:
 
 bash
-Kopiera
-Redigera
 pip install pandas matplotlib seaborn scikit-learn
 Expected Outputs:
 Depending on the type of analysis and visualization you run, you can expect the following types of outputs:
@@ -29,8 +27,6 @@ Example Outputs:
 First few rows of the dataset:
 
 python
-Kopiera
-Redigera
 print(data.head())
 Displays the first 5 rows of your CSV file or dataset.
 
