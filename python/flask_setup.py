@@ -1,31 +1,37 @@
-#Flask setup with database connection
+# Flask setup with database connection
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import psycopg2
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
+import os
 
 app = Flask(__name__)
 CORS(app)  # Allows cross-origin requests
 
+# Configuration for file uploads
+UPLOAD_FOLDER = 'uploads/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 # Function to connect to database
 def connect_to_db():
     """
-    Skapar och returnerar en anslutning till PostgreSQL-databasen.
-    Uppdatera värdena nedan med dina faktiska databasuppgifter.
+    Creates and returns a connection to the PostgreSQL database.
+    Update the values below with your actual database credentials.
     """
     return psycopg2.connect(
-        host="localhost",  
-        database="your_database",  
-        user="your_user",  
-        password="your_password"  
+        host="localhost",
+        database="your_database",
+        user="your_user",
+        password="your_password"
     )
 
 # Example of get route
 @app.route('/get-data', methods=['GET'])
 def get_data():
     """
-    Hämtar data från databasen baserat på en angiven parameter.
-    Exempel: /get-data?param=value
+    Retrieves data from the database based on a specified parameter.
+    Example: /get-data?param=value
     """
     param = request.args.get('param')
     if param is None:
@@ -35,7 +41,7 @@ def get_data():
     cursor = conn.cursor()
     
     try:
-        # SQL-question with parameters
+        # SQL query with parameters
         cursor.execute(
             """
             SELECT column1, column2, column3 
@@ -62,16 +68,12 @@ def get_data():
     
     return jsonify(result)
 
-if __name__ == '__main__':
-    app.run(debug=True)  # Starts the Flask development server
-
-
 # Example of post route to add data
 @app.route('/add-data', methods=['POST'])
 def add_data():
     """
-    Lägger till ny data i databasen. Förväntar sig en JSON-kropp i begäran.
-    Exempel: {"column1": "value1", "column2": "value2"}
+    Adds new data to the database. Expects a JSON body in the request.
+    Example: {"column1": "value1", "column2": "value2"}
     """
     data = request.get_json()
     if not data:
@@ -107,8 +109,8 @@ def add_data():
 @app.route('/update-data/<int:id>', methods=['PUT'])
 def update_data(id):
     """
-    Uppdaterar en rad i databasen baserat på det angivna ID:t.
-    Exempel: PUT /update-data/1 {"column1": "new_value", "column2": "new_value"}
+    Updates a row in the database based on the provided ID.
+    Example: PUT /update-data/1 {"column1": "new_value", "column2": "new_value"}
     """
     data = request.get_json()
     if not data:
@@ -145,8 +147,8 @@ def update_data(id):
 @app.route('/delete-data/<int:id>', methods=['DELETE'])
 def delete_data(id):
     """
-    Tar bort en rad från databasen baserat på det angivna ID:t.
-    Exempel: DELETE /delete-data/1
+    Deletes a row from the database based on the provided ID.
+    Example: DELETE /delete-data/1
     """
     conn = connect_to_db()
     cursor = conn.cursor()
@@ -169,13 +171,11 @@ def delete_data(id):
 
 
 # User signup
-from werkzeug.security import generate_password_hash, check_password_hash
-
 @app.route('/signup', methods=['POST'])
 def signup():
     """
-    Skapar en ny användare med lösenordshashning.
-    Exempel: {"username": "user1", "password": "securepassword"}
+    Creates a new user with password hashing.
+    Example: {"username": "user1", "password": "securepassword"}
     """
     data = request.get_json()
     username = data.get('username')
@@ -206,12 +206,12 @@ def signup():
     return jsonify({"message": "User created successfully"}), 201
 
 
-# Example of login. Use werkzeug and more for this case aswell
+# Example of login
 @app.route('/login', methods=['POST'])
 def login():
     """
-    Loggar in en användare genom att jämföra lösenord med lösenordshash.
-    Exempel: {"username": "user1", "password": "securepassword"}
+    Logs in a user by comparing the password with the stored hash.
+    Example: {"username": "user1", "password": "securepassword"}
     """
     data = request.get_json()
     username = data.get('username')
@@ -242,19 +242,12 @@ def login():
         conn.close()
 
 
-
 # Example of file upload
-from flask import request
-import os
-
-UPLOAD_FOLDER = 'uploads/'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
 @app.route('/upload', methods=['POST'])
 def upload_file():
     """
-    Laddar upp en fil till servern.
-    Förväntar sig en fil i formdata under nyckeln 'file'.
+    Uploads a file to the server.
+    Expects a file in the form-data under the key 'file'.
     """
     if 'file' not in request.files:
         return jsonify({"error": "No file part"}), 400
@@ -268,3 +261,6 @@ def upload_file():
     file.save(filename)
     
     return jsonify({"message": "File uploaded successfully"}), 200
+
+if __name__ == '__main__':
+    app.run(debug=True)  # Starts the Flask development server
