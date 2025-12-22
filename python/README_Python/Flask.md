@@ -1,171 +1,65 @@
-Flask Setup with Database Connection
-This section explains the dependencies required to run the Flask server with PostgreSQL and details the API endpoints you can use.
+# Flask API & Database Connector
 
-Dependencies
-To use the Flask app and interact with a PostgreSQL database, you will need to install the following dependencies:
+This repository contains a suite of essential backend scripts for RESTful API development, database management, and secure user authentication. These modules cover the fundamental requirements for server-side data operations.
 
-Required Dependencies:
-Flask: The web framework to build the server.
+## Core Infrastructure
 
-flask-cors: Allows Cross-Origin Resource Sharing (CORS).
+### 1. Server Setup (Flask)
+A fundamental utility that initializes the web application and configures Cross-Origin Resource Sharing (CORS) to permit requests from external clients.
 
-psycopg2: PostgreSQL adapter for Python.
+### 2. Database Interface (Psycopg2)
+A connection handler that establishes a secure link to a PostgreSQL database, enabling the execution of SQL queries and transaction management.
 
-werkzeug: For secure password handling.
+## API Operations
 
-Install all dependencies with the following command:
+### 3. Data Retrieval (GET)
+A query component that fetches specific records from the database based on dynamic parameters provided in the request URL.
 
-bash
-pip install flask flask-cors psycopg2 werkzeug
-API Endpoints
-1. GET Request to Retrieve Data
-Endpoint: /get-data
-
-Method: GET
-
-Description: This endpoint retrieves data from the database based on the provided query parameter.
-
-Request:
-kotlin
-GET /get-data?param=value
-Expected Response:
-If param is provided and the data is retrieved successfully, the response will look like:
-
-json
+```json
+// Success
 [
-    {
-        "column1": "data1",
-        "column2": "data2",
-        "column3": "data3"
-    }
+    { "column1": "data1", "column2": "data2", "column3": "data3" }
 ]
-If param is missing from the request, you will receive an error:
 
-json
-{
-    "error": "Missing 'param' parameter"
-}
-2. POST Request to Add Data
-Endpoint: /add-data
+// Error
+{ "error": "Missing 'param' parameter" }
 
-Method: POST
+### 4. Data Insertion (POST)
+A transactional tool designed to parse JSON payloads and insert new records into the database tables.
 
-Description: This endpoint allows adding data to the database.
+```json
+{ "column1": "new_data1", "column2": "new_data2" }
+```
 
-Request:
-Send a POST request with JSON data in the body:
+### 5. Data Modification (PUT)
+An update utility that locates existing records by ID and modifies their content based on the provided JSON input.
 
-json
-{
-    "column1": "new_data1",
-    "column2": "new_data2"
-}
-Expected Response:
-json
-{
-    "message": "Data added successfully"
-}
-If there's an issue with the request or the database, you may receive an error message:
+```json
+{ "param": "value_to_find", "column1": "updated_data1", "column2": "updated_data2" }
+```
 
-json
-{
-    "error": "Database connection failed"
-}
-3. PUT Request to Update Data
-Endpoint: /update-data
+### 6. Data Removal (DELETE)
+A maintenance tool used to permanently remove specific records from the database using their unique identifier.
 
-Method: PUT
+```json
+{ "param": "value_to_find" }
+```
 
-Description: This endpoint allows updating existing data in the database.
+## Security & Utilities
 
-Request:
-Send a PUT request with JSON data containing the values to update:
+### 7. User Authentication
+A security module that handles user registration and login processes, utilizing hash algorithms (Werkzeug) to store and verify passwords securely.
 
-json
-{
-    "param": "value_to_find",
-    "column1": "updated_data1",
-    "column2": "updated_data2"
-}
-Expected Response:
+```json
+{ "username": "user1", "password": "secure_password" }
+```
 
-json
-{
-    "message": "Data updated successfully"
-}
-If the specified data could not be found or updated:
+### 8. File Upload
+A storage utility that accepts file transfers via form-data and saves them to a designated directory on the server.
 
-json
-{
-    "error": "Data update failed"
-}
-4. DELETE Request to Delete Data
-Endpoint: /delete-data
+## Dependencies
 
-Method: DELETE
-
-Description: This endpoint deletes data from the database.
-
-Request:
-Send a DELETE request with JSON data specifying the record to delete:
-
-json
-{
-    "param": "value_to_find"
-}
-Expected Response:
-json
-{
-    "message": "Data deleted successfully"
-}
-If the deletion fails for any reason:
-
-json
-{
-    "error": "Data deletion failed"
-}
-5. User Authentication (Login/Signup)
-Endpoint (Sign-Up): /signup
-
-Endpoint (Login): /login
-
-Method: POST
-
-Description: These endpoints allow users to sign up and log in, with password hashing for secure authentication.
-
-Sign-Up Request:
-json
-{
-    "username": "new_user",
-    "password": "new_password"
-}
-Expected Response (Sign-Up):
-json
-{
-    "message": "User signed up successfully"
-}
-Login Request:
-json
-{
-    "username": "new_user",
-    "password": "new_password"
-}
-Expected Response (Login):
-If the credentials are correct:
-
-json
-{
-    "message": "Login successful"
-}
-If the credentials are invalid:
-
-json
-{
-    "message": "Invalid credentials"
-}
-Additional Notes
-Make sure PostgreSQL is installed and running before using the application.
-
-Modify the SQL queries in your Flask routes according to your database schema.
-
-For security reasons, avoid hardcoding sensitive credentials (e.g., database passwords) in your code. Use environment variables or .env files.
+* **Flask**: Web framework core.
+* **Flask-CORS**: Cross-origin resource sharing.
+* **Psycopg2**: PostgreSQL database adapter.
+* **Werkzeug**: Password hashing and security.

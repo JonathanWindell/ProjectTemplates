@@ -1,4 +1,5 @@
-JavaScript Helper Utilities
+# JavaScript Helper Utilities
+
 A collection of reusable JavaScript helper classes and functions for both browser development and Node.js applications. These utilities are designed to simplify common tasks and provide a consistent API for your projects.
 
 Contents
@@ -240,10 +241,5 @@ try {
 } catch (error) {
   console.error('Could not write to the file:', error);
 }
-Contributing
-Contributions are welcome! Create an issue or submit a pull request to suggest changes or additions.
-
-License
-This project is licensed under the MIT License.
 
 This README provides an overview of the JavaScript helper utilities, including usage examples for each module and instructions on how to integrate them into your project.
